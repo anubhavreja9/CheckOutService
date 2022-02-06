@@ -1,10 +1,10 @@
-import java.util.List;
+import java.util.Map;
 
 public class Cart {
 
-    List<Items> items;
+    Map<Item,Integer> items;
 
-    public Cart(List<Items> items){
+    public Cart(Map<Item,Integer> items){
         this.items = items;
     }
 }
