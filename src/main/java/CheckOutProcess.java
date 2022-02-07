@@ -16,21 +16,20 @@ public class CheckOutProcess {
     if(cart == null || cart.items == null){
         return 0;
     }
-    Map<Item,Integer> itemsMap = cart.items;
     double finalAmount = 0 ;
-    for(Map.Entry<Item,Integer> itemCart: itemsMap.entrySet()){
+    for(Map.Entry<Item,List<Promotions>> itemPromo: itemPromotions.entrySet()){
 
-        List<Promotions> promotions = itemPromotions.get(itemCart.getKey());
-
-        for(Promotions promotion:promotions) {
+         for(Promotions promotion:itemPromo.getValue()) {
             double amount = promotion.apply(cart);
             if (amount != 0) {
                 finalAmount += amount;
                 break;
             }
         }
-        finalAmount += itemCart.getValue() * prices.get(itemCart.getKey());
         }
+    for(Map.Entry<Item,Integer> item:cart.items.entrySet()){
+        finalAmount += item.getValue() * prices.get(item.getKey());
+    }
     return finalAmount;
     }
 }

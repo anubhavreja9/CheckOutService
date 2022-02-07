@@ -13,11 +13,12 @@ public class CombinedPromotion implements Promotions{
         int calcQuan = 0;
         int minQuant = Integer.MAX_VALUE;
         for(Item item:itemsQuan) {
-            minQuant = Math.min(minQuant,cart.items.get(item));
+            minQuant = Math.min(minQuant,cart.items.get(item)==null?0:cart.items.get(item));
         }
         calcQuan = minQuant == Integer.MAX_VALUE?0:minQuant;
         for(Item item:itemsQuan){
-            cart.items.put(item,cart.items.get(item)-minQuant);
+            int q = cart.items.get(item)==null?0:cart.items.get(item);
+            cart.items.put(item,q-minQuant);
         }
 
 
