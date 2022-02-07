@@ -30,7 +30,7 @@ class CheckOutProcessTest {
         processor.addPrices(prices);
 
         SinglePromotion itemAPromotion = new SinglePromotion(itemA,130,3);
-        SinglePromotion itemBPromotion = new SinglePromotion(itemA,45,2);
+        SinglePromotion itemBPromotion = new SinglePromotion(itemB,45,2);
         List<Item> itemsCombined = new ArrayList<>(Arrays.asList(itemC,itemD));
         CombinedPromotion combined = new CombinedPromotion(itemsCombined,30);
         Map<Item,List<Promotions>> promotions = new HashMap<>();
@@ -55,8 +55,28 @@ class CheckOutProcessTest {
     }
     @Test
     void processCheckOutSc2() {
+        Item itemA = new Item("A");
+        Item itemB = new Item("B");
+        Item itemC = new Item("C");
+        Map<Item,Integer> quantity = new HashMap<>();
+        quantity.put(itemA,5);
+        quantity.put(itemB,5);
+        quantity.put(itemC,1);
+        Cart newCart = new Cart(quantity);
+        Assertions.assertEquals(processor.processCheckOut(newCart),370.0);
     }
     @Test
     void processCheckOutSc3() {
+        Item itemA = new Item("A");
+        Item itemB = new Item("B");
+        Item itemC = new Item("C");
+        Item itemD = new Item("D");
+        Map<Item,Integer> quantity = new HashMap<>();
+        quantity.put(itemA,3);
+        quantity.put(itemB,5);
+        quantity.put(itemC,1);
+        quantity.put(itemD,1);
+        Cart newCart = new Cart(quantity);
+        Assertions.assertEquals(processor.processCheckOut(newCart),280.0);
     }
 }

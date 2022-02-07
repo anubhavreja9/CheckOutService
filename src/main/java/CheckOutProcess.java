@@ -3,8 +3,8 @@ import java.util.Map;
 
 public class CheckOutProcess {
 
-    Map<Item,Double> prices;
-    Map<Item, List<Promotions>> itemPromotions;
+    private Map<Item,Double> prices;
+    private Map<Item, List<Promotions>> itemPromotions;
     public void addPrices(Map<Item,Double> prices){
         this.prices = prices;
     }
@@ -20,11 +20,8 @@ public class CheckOutProcess {
     for(Map.Entry<Item,List<Promotions>> itemPromo: itemPromotions.entrySet()){
 
          for(Promotions promotion:itemPromo.getValue()) {
-            double amount = promotion.apply(cart);
-            if (amount != 0) {
+             double amount = promotion.apply(cart);
                 finalAmount += amount;
-                break;
-            }
         }
         }
     for(Map.Entry<Item,Integer> item:cart.items.entrySet()){
